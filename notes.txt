@@ -1,0 +1,3 @@
+terraform init
+terraform apply -auto-approve -> creates backend.tf file
+terraform init -force-copy -> copy local tfstate to s3 and changes backend config
