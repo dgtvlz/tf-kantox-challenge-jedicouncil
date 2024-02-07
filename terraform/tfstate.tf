@@ -3,14 +3,14 @@
 # be bootstrapped according to the simple yet essential procedure in
 # https://github.com/cloudposse/terraform-aws-tfstate-backend#usage
 module "terraform_state_backend" {
-    source = "cloudposse/tfstate-backend/aws"
-    version     = "v1.4.0"
-    namespace  = var.env.name
-    stage      = var.env.environment
-    name       = "terraform"
-    attributes = ["state"]
+  source     = "cloudposse/tfstate-backend/aws"
+  version    = "v1.4.0"
+  namespace  = var.env.name
+  stage      = var.env.environment
+  name       = "terraform"
+  attributes = ["state"]
 
-    terraform_backend_config_file_path = "."
-    terraform_backend_config_file_name = "backend.tf"
-    force_destroy                      = false
+  terraform_backend_config_file_path = "."
+  terraform_backend_config_file_name = "backend.tf"
+  force_destroy                      = false
 }
