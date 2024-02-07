@@ -4,7 +4,7 @@ module "lambda_update_locations" {
 
   function_name = "${var.env.prefix}-${var.env.project}-update-locations"
   description   = "Lambda which receives the updated location of Jedis"
-  handler       = "index.main"
+  handler       = "index.handler"
   runtime       = "nodejs18.x"
 
   source_path = "../src/update-locations"
@@ -16,7 +16,7 @@ module "lambda_get_location" {
 
   function_name = "${var.env.prefix}-${var.env.project}-get-location"
   description   = "Lambda which retrieves the location of a Jedi"
-  handler       = "index.main"
+  handler       = "index.handler"
   runtime       = "nodejs18.x"
 
   source_path = "../src/get-location"

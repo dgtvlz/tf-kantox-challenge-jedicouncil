@@ -1,6 +1,6 @@
-const AWS = require('aws-sdk');
-const dynamodb = new AWS.DynamoDB.DocumentClient();
-
 exports.handler = async (event) => {
-  
+    return {
+      statusCode: 200,
+      body: "Hello World"
+    };
 };
