@@ -19,5 +19,5 @@ module "lambda_get_location" {
   handler       = "index.main"
   runtime       = "nodejs18.x"
 
-  source_path = "../src/get-locations"
+  source_path = "../src/get-location"
 }
