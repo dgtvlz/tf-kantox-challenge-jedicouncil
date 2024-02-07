@@ -5,7 +5,7 @@ resource "aws_dynamodb_table" "locations" {
 
   attribute {
     name = "jedi_id"
-    type = "S"
+    type = "B"
   }
 
 }
