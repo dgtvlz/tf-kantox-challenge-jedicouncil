@@ -4,7 +4,6 @@ import boto3
 from boto3.dynamodb.types import Binary
 
 dynamodb = boto3.client('dynamodb', region_name=os.environ['REGION'])
-kms_client = boto3.client('kms', region_name=os.environ['REGION'])
 
 def lambda_handler(event, context):
     jedi_id = event['queryStringParameters']['jedi_id']

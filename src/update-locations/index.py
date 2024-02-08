@@ -4,7 +4,6 @@ import os
 import time
 
 dynamodb = boto3.client('dynamodb', region_name=os.environ['REGION'])
-kms_client = boto3.client('kms', region_name=os.environ['REGION'])
 
 def lambda_handler(event, context):
     try:

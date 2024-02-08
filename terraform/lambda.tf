@@ -11,7 +11,6 @@ module "lambda_update_locations" {
   environment_variables = {
     REGION              = var.env.region
     DYNAMODB_TABLE_NAME = aws_dynamodb_table.locations.id
-    CMK_KEY_ID          = module.kms_key.key_id
   }
 
   source_path = "../src/update-locations"
@@ -63,7 +62,6 @@ module "lambda_get_location" {
   environment_variables = {
     REGION              = var.env.region
     DYNAMODB_TABLE_NAME = aws_dynamodb_table.locations.id
-    CMK_KEY_ID          = module.kms_key.key_id
   }
 
   source_path = "../src/get-location"
