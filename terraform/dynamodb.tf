@@ -13,4 +13,8 @@ resource "aws_dynamodb_table" "locations" {
     kms_key_arn = module.kms_key.key_arn
   }
 
+  point_in_time_recovery {
+    enabled = var.dynamodb_config.point_in_time_recovery_enabled
+  }
+
 }

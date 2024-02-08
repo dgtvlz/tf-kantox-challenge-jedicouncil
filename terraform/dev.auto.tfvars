@@ -10,8 +10,9 @@ env = {
 }
 
 dynamodb_config = {
-  billing_mode = "PAY_PER_REQUEST"
-  hash_key     = "jedi_id"
+  billing_mode           = "PAY_PER_REQUEST"
+  hash_key               = "jedi_id"
+  point_in_time_recovery = true
 }
 
 lambda_update_config = {

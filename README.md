@@ -125,3 +125,205 @@ Here are some potential enhancements that could be implemented in future iterati
 3. **Set a Custom DNS with a Proper Certificate on API Gateway**:
    - Configure a custom domain name for the API Gateway to provide a branded and more user-friendly endpoint.
    - Obtain and attach a proper SSL/TLS certificate to the custom domain to ensure secure communication between clients and the API.
+
+## Infracost Report
+[Infracost](https://www.infracost.io/docs/) is a nice tool which let you know the cost impact of cloud infrastructure.
+
+
+```
+ Name                                                                                      Monthly Qty  Unit                        Monthly Cost 
+                                                                                                                                                 
+ aws_api_gateway_rest_api.jedi_api                                                                                                               
+ └─ Requests (first 333M)                                                          Monthly cost depends on usage: $3.50 per 1M requests          
+                                                                                                                                                 
+ aws_dynamodb_table.locations                                                                                                                    
+ ├─ Write request unit (WRU)                                                       Monthly cost depends on usage: $0.00000125 per WRUs           
+ ├─ Read request unit (RRU)                                                        Monthly cost depends on usage: $0.00000025 per RRUs           
+ ├─ Data storage                                                                   Monthly cost depends on usage: $0.25 per GB                   
+ ├─ Point-In-Time Recovery (PITR) backup storage                                   Monthly cost depends on usage: $0.20 per GB                   
+ ├─ On-demand backup storage                                                       Monthly cost depends on usage: $0.10 per GB                   
+ ├─ Table data restored                                                            Monthly cost depends on usage: $0.15 per GB                   
+ └─ Streams read request unit (sRRU)                                               Monthly cost depends on usage: $0.0000002 per sRRUs           
+                                                                                                                                                 
+ module.kms_key.aws_kms_key.default[0]                                                                                                           
+ ├─ Customer master key                                                                              1  months                             $1.00 
+ ├─ Requests                                                                       Monthly cost depends on usage: $0.03 per 10k requests         
+ ├─ ECC GenerateDataKeyPair requests                                               Monthly cost depends on usage: $0.10 per 10k requests         
+ └─ RSA GenerateDataKeyPair requests                                               Monthly cost depends on usage: $0.10 per 10k requests         
+                                                                                                                                                 
+ module.lambda_get_location.aws_cloudwatch_log_group.lambda[0]                                                                                   
+ ├─ Data ingested                                                                  Monthly cost depends on usage: $0.50 per GB                   
+ ├─ Archival Storage                                                               Monthly cost depends on usage: $0.03 per GB                   
+ └─ Insights queries data scanned                                                  Monthly cost depends on usage: $0.005 per GB                  
+                                                                                                                                                 
+ module.lambda_get_location.aws_lambda_function.this[0]                                                                                          
+ ├─ Requests                                                                       Monthly cost depends on usage: $0.20 per 1M requests          
+ ├─ Ephemeral storage                                                              Monthly cost depends on usage: $0.0000000309 per GB-seconds   
+ └─ Duration (first 6B)                                                            Monthly cost depends on usage: $0.0000166667 per GB-seconds   
+                                                                                                                                                 
+ module.lambda_update_locations.aws_cloudwatch_log_group.lambda[0]                                                                               
+ ├─ Data ingested                                                                  Monthly cost depends on usage: $0.50 per GB                   
+ ├─ Archival Storage                                                               Monthly cost depends on usage: $0.03 per GB                   
+ └─ Insights queries data scanned                                                  Monthly cost depends on usage: $0.005 per GB                  
+                                                                                                                                                 
+ module.lambda_update_locations.aws_lambda_function.this[0]                                                                                      
+ ├─ Requests                                                                       Monthly cost depends on usage: $0.20 per 1M requests          
+ ├─ Ephemeral storage                                                              Monthly cost depends on usage: $0.0000000309 per GB-seconds   
+ └─ Duration (first 6B)                                                            Monthly cost depends on usage: $0.0000166667 per GB-seconds   
+                                                                                                                                                 
+ module.terraform_state_backend.aws_dynamodb_table.with_server_side_encryption[0]                                                                
+ ├─ Write request unit (WRU)                                                       Monthly cost depends on usage: $0.00000125 per WRUs           
+ ├─ Read request unit (RRU)                                                        Monthly cost depends on usage: $0.00000025 per RRUs           
+ ├─ Data storage                                                                   Monthly cost depends on usage: $0.25 per GB                   
+ ├─ Point-In-Time Recovery (PITR) backup storage                                   Monthly cost depends on usage: $0.20 per GB                   
+ ├─ On-demand backup storage                                                       Monthly cost depends on usage: $0.10 per GB                   
+ ├─ Table data restored                                                            Monthly cost depends on usage: $0.15 per GB                   
+ └─ Streams read request unit (sRRU)                                               Monthly cost depends on usage: $0.0000002 per sRRUs           
+                                                                                                                                                 
+ module.terraform_state_backend.aws_s3_bucket.default[0]                                                                                         
+ └─ Standard                                                                                                                                     
+    ├─ Storage                                                                     Monthly cost depends on usage: $0.023 per GB                  
+    ├─ PUT, COPY, POST, LIST requests                                              Monthly cost depends on usage: $0.005 per 1k requests         
+    ├─ GET, SELECT, and all other requests                                         Monthly cost depends on usage: $0.0004 per 1k requests        
+    ├─ Select data scanned                                                         Monthly cost depends on usage: $0.002 per GB                  
+    └─ Select data returned                                                        Monthly cost depends on usage: $0.0007 per GB                 
+                                                                                                                                                 
+ OVERALL TOTAL                                                                                                                             $1.00 
+──────────────────────────────────
+34 cloud resources were detected:
+∙ 9 were estimated, 8 of which include usage-based costs, see https://infracost.io/usage-file
+∙ 25 were free, rerun with --show-skipped to see details
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Project                                            ┃ Monthly cost ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫
+┃ project_sm6c6vet                                   ┃ $1           ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┛
+```
+
+## Tfsec Report
+
+[Tfsec](https://github.com/aquasecurity/tfsec) is a nice tool which uses static analysis of your terraform code to spot potential misconfigurations.
+No major issues where found.
+
+```
+Result #1 LOW Authorization is not enabled for this method. 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  apigateway.tf:22
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   18    resource "aws_api_gateway_method" "get_jedi_method" {
+   19      rest_api_id   = aws_api_gateway_rest_api.jedi_api.id
+   20      resource_id   = aws_api_gateway_resource.get_jedi_resource.id
+   21      http_method   = "GET"
+   22  [   authorization = "NONE" ("NONE")
+   23    }
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+          ID aws-api-gateway-no-public-access
+      Impact API gateway methods can be accessed without authorization.
+  Resolution Use and authorization method or require API Key
+
+  More Information
+  - https://aquasecurity.github.io/tfsec/v1.28.5/checks/aws/api-gateway/no-public-access/
+  - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_method#authorization
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+Result #2 LOW Authorization is not enabled for this method. 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  apigateway.tf:47
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   43    resource "aws_api_gateway_method" "update_jedi_method" {
+   44      rest_api_id   = aws_api_gateway_rest_api.jedi_api.id
+   45      resource_id   = aws_api_gateway_resource.update_jedi_resource.id
+   46      http_method   = "POST"
+   47  [   authorization = "NONE" ("NONE")
+   48    }
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+          ID aws-api-gateway-no-public-access
+      Impact API gateway methods can be accessed without authorization.
+  Resolution Use and authorization method or require API Key
+
+  More Information
+  - https://aquasecurity.github.io/tfsec/v1.28.5/checks/aws/api-gateway/no-public-access/
+  - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_method#authorization
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+Result #3 LOW Function does not have tracing enabled. 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  terraform-aws-modules/lambda/aws/src/.terraform/modules/lambda_get_location/main.tf:24-162
+   via lambda.tf:52-68 (module.lambda_get_location)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   24  ┌ resource "aws_lambda_function" "this" {
+   25  │   count = local.create && var.create_function && !var.create_layer ? 1 : 0
+   26  │ 
+   27  │   function_name                      = var.function_name
+   28  │   description                        = var.description
+   29  │   role                               = var.create_role ? aws_iam_role.lambda[0].arn : var.lambda_role
+   30  │   handler                            = var.package_type != "Zip" ? null : var.handler
+   31  │   memory_size                        = var.memory_size
+   32  └   reserved_concurrent_executions     = var.reserved_concurrent_executions
+   ..  
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+          ID aws-lambda-enable-tracing
+      Impact Without full tracing enabled it is difficult to trace the flow of logs
+  Resolution Enable tracing
+
+  More Information
+  - https://aquasecurity.github.io/tfsec/v1.28.5/checks/aws/lambda/enable-tracing/
+  - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function#mode
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+Result #4 LOW Function does not have tracing enabled. 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  terraform-aws-modules/lambda/aws/src/.terraform/modules/lambda_update_locations/main.tf:24-162
+   via lambda.tf:1-17 (module.lambda_update_locations)
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   24  ┌ resource "aws_lambda_function" "this" {
+   25  │   count = local.create && var.create_function && !var.create_layer ? 1 : 0
+   26  │ 
+   27  │   function_name                      = var.function_name
+   28  │   description                        = var.description
+   29  │   role                               = var.create_role ? aws_iam_role.lambda[0].arn : var.lambda_role
+   30  │   handler                            = var.package_type != "Zip" ? null : var.handler
+   31  │   memory_size                        = var.memory_size
+   32  └   reserved_concurrent_executions     = var.reserved_concurrent_executions
+   ..  
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+          ID aws-lambda-enable-tracing
+      Impact Without full tracing enabled it is difficult to trace the flow of logs
+  Resolution Enable tracing
+
+  More Information
+  - https://aquasecurity.github.io/tfsec/v1.28.5/checks/aws/lambda/enable-tracing/
+  - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function#mode
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  timings
+  ──────────────────────────────────────────
+  disk i/o             952.723µs
+  parsing              311.463285ms
+  adaptation           1.024148ms
+  checks               5.170707ms
+  total                318.610863ms
+
+  counts
+  ──────────────────────────────────────────
+  modules downloaded   0
+  modules processed    10
+  blocks processed     766
+  files read           57
+
+  results
+  ──────────────────────────────────────────
+  passed               22
+  ignored              10
+  critical             0
+  high                 0
+  medium               0
+  low                  4
+
+  22 passed, 10 ignored, 4 potential problem(s) detected.
+```
