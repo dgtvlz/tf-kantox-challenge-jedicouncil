@@ -1,5 +1,5 @@
 env = {
-  name        = "jedi"
+  name        = "jedic"
   prefix      = "dev"
   region      = "us-east-1"
   key_name    = "development"
