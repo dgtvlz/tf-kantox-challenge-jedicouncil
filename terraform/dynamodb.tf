@@ -1,15 +1,15 @@
 resource "aws_dynamodb_table" "locations" {
   name         = "${var.env.prefix}-${var.env.project}-locations-dynamodb"
-  billing_mode = "PAY_PER_REQUEST"
-  hash_key     = "jedi_id"
+  billing_mode = var.dynamodb_config.billing_mode
+  hash_key     = var.dynamodb_config.hash_key
 
   attribute {
-    name = "jedi_id"
+    name = var.dynamodb_config.hash_key
     type = "S"
   }
 
   server_side_encryption {
-    enabled = true
+    enabled     = true
     kms_key_arn = module.kms_key.key_arn
   }
 

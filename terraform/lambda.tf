@@ -3,15 +3,15 @@ module "lambda_update_locations" {
   version = "v7.2.1"
 
   function_name = "${var.env.prefix}-${var.env.project}-update-locations"
-  description   = "Lambda which receives the updated location of Jedis"
-  handler       = "index.lambda_handler"
-  runtime       = "python3.8"
-  timeout       = 30
+  description   = var.lambda_update_config.description
+  handler       = var.lambda_update_config.handler
+  runtime       = var.lambda_update_config.runtime
+  timeout       = var.lambda_update_config.timeout
 
   environment_variables = {
-    REGION = var.env.region
+    REGION              = var.env.region
     DYNAMODB_TABLE_NAME = aws_dynamodb_table.locations.id
-    CMK_KEY_ID = module.kms_key.key_id
+    CMK_KEY_ID          = module.kms_key.key_id
   }
 
   source_path = "../src/update-locations"
@@ -20,13 +20,13 @@ module "lambda_update_locations" {
 resource "aws_iam_policy" "lambda_update_locations_permissions_policy" {
   name        = "${var.env.prefix}-${var.env.project}-update-locations-policy"
   description = "Policy to grant permissions to Lambda Update Locations"
-  
+
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
       {
-        Effect   = "Allow",
-        Action   = [
+        Effect = "Allow",
+        Action = [
           "dynamodb:PutItem",
           "dynamodb:UpdateItem",
           "dynamodb:BatchWriteItem"
@@ -34,8 +34,8 @@ resource "aws_iam_policy" "lambda_update_locations_permissions_policy" {
         Resource = aws_dynamodb_table.locations.arn
       },
       {
-        Effect   = "Allow",
-        Action   = [
+        Effect = "Allow",
+        Action = [
           "kms:Encrypt",
           "kms:Decrypt"
         ],
@@ -55,15 +55,15 @@ module "lambda_get_location" {
   version = "v7.2.1"
 
   function_name = "${var.env.prefix}-${var.env.project}-get-location"
-  description   = "Lambda which retrieves the location of a Jedi"
-  handler       = "index.lambda_handler"
-  runtime       = "python3.8"
-  timeout       = 30
+  description   = var.lambda_get_config.description
+  handler       = var.lambda_get_config.handler
+  runtime       = var.lambda_get_config.runtime
+  timeout       = var.lambda_get_config.timeout
 
   environment_variables = {
-    REGION = var.env.region
+    REGION              = var.env.region
     DYNAMODB_TABLE_NAME = aws_dynamodb_table.locations.id
-    CMK_KEY_ID = module.kms_key.key_id
+    CMK_KEY_ID          = module.kms_key.key_id
   }
 
   source_path = "../src/get-location"
@@ -72,20 +72,20 @@ module "lambda_get_location" {
 resource "aws_iam_policy" "lambda_get_location_permissions_policy" {
   name        = "${var.env.prefix}-${var.env.project}-get-location-policy"
   description = "Policy to grant permissions to Lambda Get Location"
-  
+
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
       {
-        Effect   = "Allow",
-        Action   = [
+        Effect = "Allow",
+        Action = [
           "dynamodb:GetItem"
         ],
         Resource = aws_dynamodb_table.locations.arn
       },
       {
-        Effect   = "Allow",
-        Action   = [
+        Effect = "Allow",
+        Action = [
           "kms:Decrypt"
         ],
         Resource = module.kms_key.key_arn
