@@ -1,0 +1,57 @@
+{
+    "98721": {
+        "name": "Yoda",
+        "planet": "Dagobah",
+        "power_level": 90
+    },
+    "54832": {
+        "name": "Obi-Wan Kenobi",
+        "planet": "Stewjon",
+        "power_level": 85
+    },
+    "12345": {
+        "name": "Mace Windu",
+        "planet": "Haruun Kal",
+        "power_level": 96
+    },
+    "78965": {
+        "name": "Rey",
+        "planet": "Jakku",
+        "power_level": 75
+    },
+    "63421": {
+        "name": "Qui-Gon Jinn",
+        "planet": "Coruscant",
+        "power_level": 82
+    },
+    "25689": {
+        "name": "Ahsoka Tano",
+        "planet": "Shili",
+        "power_level": 78
+    },
+    "86420": {
+        "name": "Kit Fisto",
+        "planet": "Glee Anselm",
+        "power_level": 76
+    },
+    "51234": {
+        "name": "Plo Koon",
+        "planet": "Dorin",
+        "power_level": 83
+    },
+    "93571": {
+        "name": "Ki-Adi-Mundi",
+        "planet": "Cerean",
+        "power_level": 81
+    },
+    "32698": {
+        "name": "Shaak Ti",
+        "planet": "Shili",
+        "power_level": 79
+    },
+    "74623": {
+        "name": "Luminara Unduli",
+        "planet": "Mirial",
+        "power_level": 77
+    }
+}

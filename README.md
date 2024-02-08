@@ -62,8 +62,37 @@ Follow these steps to set up the solution:
     Follow the prompts to migrate the existing local state to the remote backend.
 
 Once these steps are completed, the solution will be deployed in your AWS account, including a bucket and a DynamoDB table to manage the Terraform state remotely.
+After applying, you will notice that two Outputs are being provided: `get_api_url` and `update_api_url`. These URLs will be used to interact with the solution.
 
 ## Usage
+
+To interact with the solution, follow the instructions below:
+
+### GET-LOCATION API
+
+To retrieve Jedi information using the GET API, use the following `curl` command:
+
+```bash
+curl -X GET "<get_api_url>?jedi_id=12345"
+
+Response:
+{"jedi_id": "12345", "power_level": 90, "name": "Mace Windu", "planet": "Haruun Kal", "update_ts": 1707407787}
+```
+
+Replace `get_api_url` with the actual URL provided as the get_api_url output after applying the Terraform configuration. Additionally, replace 12345 with the ID of the Jedi you want to retrieve information for.
+
+### UPDATE-LOCATIONS API
+
+To update Jedi information using the UPDATE API and a JSON file, you can use the following `curl` command:
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d @payload/jedis.json "<update_api_url>"
+
+Response:
+{"message": "Manifest received and processed successfully"}
+```
+
+Replace `update_api_url` with the actual URL provided as the update_api_url output after applying the Terraform configuration. Make sure to specify the correct path to the JSON file containing the Jedi information (in this example, payload/jedis.json).
 
 ## Terraform
 
@@ -82,3 +111,17 @@ The solution leverages several Terraform modules to provision and manage resourc
    - Description: This module sets up a remote backend for storing Terraform state files on AWS, enabling collaboration and state management.
 
 ## Future Improvements
+
+Here are some potential enhancements that could be implemented in future iterations of the solution:
+
+1. **Use VPC with VPC Endpoints to Deploy Lambdas Privately**:
+   - Implement a Virtual Private Cloud (VPC) for enhanced security and isolation of resources.
+   - Deploy Lambda functions within the VPC and utilize VPC endpoints to access AWS services privately, reducing exposure to the public internet.
+
+2. **Use IAM Signature on API Methods for Request Authorization**:
+   - Implement IAM Signature on both API methods (update and get) to enforce authorization on incoming requests.
+   - This approach enhances security by validating the authenticity of requests using IAM credentials.
+
+3. **Set a Custom DNS with a Proper Certificate on API Gateway**:
+   - Configure a custom domain name for the API Gateway to provide a branded and more user-friendly endpoint.
+   - Obtain and attach a proper SSL/TLS certificate to the custom domain to ensure secure communication between clients and the API.

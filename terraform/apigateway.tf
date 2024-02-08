@@ -71,3 +71,11 @@ resource "aws_api_gateway_deployment" "jedi_api_deployment" {
 
   depends_on = [aws_api_gateway_integration.update_jedi_integration]
 }
+
+output "get_api_url" {
+  value = "${aws_api_gateway_deployment.jedi_api_deployment.invoke_url}/get-jedi"
+}
+
+output "update_api_url" {
+  value = "${aws_api_gateway_deployment.jedi_api_deployment.invoke_url}/update-jedi"
+}
