@@ -204,7 +204,7 @@ Here are some potential enhancements that could be implemented in future iterati
 ## Tfsec Report
 
 [Tfsec](https://github.com/aquasecurity/tfsec) is a nice tool which uses static analysis of your terraform code to spot potential misconfigurations.
-No major issues where found.
+No major issues were found.
 
 ```
 Result #1 LOW Authorization is not enabled for this method. 
