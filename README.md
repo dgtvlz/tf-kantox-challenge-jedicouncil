@@ -126,6 +126,10 @@ Here are some potential enhancements that could be implemented in future iterati
    - Configure a custom domain name for the API Gateway to provide a branded and more user-friendly endpoint.
    - Obtain and attach a proper SSL/TLS certificate to the custom domain to ensure secure communication between clients and the API.
 
+4. **Switch to OpenTofu**:
+   - Terraform is no longer open source, and OpenTofu is a Terraform fork maintained by the community to remain open source.
+   - We used the latest Terraform open source version available, but with time, it may become obsolete.
+
 ## Infracost Report
 [Infracost](https://www.infracost.io/docs/) is a nice tool which let you know the cost impact of cloud infrastructure.
 
